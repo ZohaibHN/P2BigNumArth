@@ -2,6 +2,7 @@ import java.io.*;
 import java.util.Scanner;
 public class BigNumArithmetic {
     static LStack stack = new LStack();
+    static LList digitLinkList = new LList();
     public static void main(String[] args) {
         Scanner file;
         //PrintWriter pw = new PrintWriter("output.txt");
@@ -32,6 +33,7 @@ public class BigNumArithmetic {
                     }
                     System.exit(-1); //To loop through once for testing
                 }
+
         } catch (IOException i) {
             i.printStackTrace();
         }

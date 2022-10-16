@@ -16,6 +16,7 @@ class LList implements List {
         curr = tail = new Link(null); // Create trailer
         head = new Link(tail);        // Create header
         listSize = 0;
+
     }
 
     // Insert "it" at current position

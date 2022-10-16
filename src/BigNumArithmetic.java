@@ -24,6 +24,7 @@ public class BigNumArithmetic {
                         String wholeLine = singleLine.nextLine();
 
                         wholeLine = wholeLine.replaceAll("\\W", " ");  //detects & removes special characters
+                        wholeLine = wholeLine.replaceAll("\\s+", " ");
                         wholeLine = wholeLine.replaceFirst("^0+(?!$)", ""); //trims zeroes
                         stack.push(wholeLine); //pushes number to stack
 

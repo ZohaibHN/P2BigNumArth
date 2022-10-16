@@ -17,14 +17,11 @@ public class BigNumArithmetic {
                         line = file.nextLine();
                         line = line.trim();
                     }
-                    line = line.replaceAll("\\s+", " "); //gets rid of excess whitespace
                     Scanner singleLine = new Scanner(line);   //scanner to go through the line's elements
-
                     while (singleLine.hasNext()) {    //loop to go through the line's characters
                         String wholeLine = singleLine.nextLine();
-
                         wholeLine = wholeLine.replaceAll("\\W", " ");  //detects & removes special characters
-                        wholeLine = wholeLine.replaceAll("\\s+", " ");
+                        wholeLine = wholeLine.replaceAll("\\s+", " ");  //gets rid of extra whitespace
                         wholeLine = wholeLine.replaceFirst("^0+(?!$)", ""); //trims zeroes
                         stack.push(wholeLine); //pushes number to stack
 

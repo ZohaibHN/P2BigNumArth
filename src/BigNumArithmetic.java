@@ -21,7 +21,7 @@ public class BigNumArithmetic {
 
                     while (word.hasNext()) {
                         String nextWord = word.next();
-                        nextWord = nextWord.replaceAll("\\W", "");
+                        nextWord = nextWord.replaceAll("\\W", "");  //detects special characters
                         nextWord = nextWord.replaceFirst("^0+(?!$)", ""); //trims zeroes
                         stack.push(nextWord); //pushes number to stack
 

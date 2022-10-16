@@ -2,7 +2,6 @@ import java.io.*;
 import java.util.Scanner;
 public class BigNumArithmetic {
     static LStack stack = new LStack();
-
     public static void main(String[] args) {
         Scanner file;
         //PrintWriter pw = new PrintWriter("output.txt");

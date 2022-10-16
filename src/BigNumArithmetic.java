@@ -21,11 +21,10 @@ public class BigNumArithmetic {
 
                     while (word.hasNext()) {
                         String nextWord = word.next();
+                        nextWord = nextWord.replaceAll("\\W", "");  //detects special characters
+                        nextWord = nextWord.replaceFirst("^0+(?!$)", ""); //trims zeroes
+                        stack.push(nextWord); //pushes number to stack
 
-                        if (!nextWord.equals("+") && !(nextWord.equals("*")) && !(nextWord.equals("^"))) {
-                            nextWord = nextWord.replaceFirst("^0+(?!$)", ""); //trims zeroes
-                                stack.push(nextWord); //pushes number to stack
-                        }
                         if (stack.topValue() == null) { //detects all "null" elements in stack and removes them
                             stack.pop();
                         } else

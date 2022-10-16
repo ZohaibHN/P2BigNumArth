@@ -3,8 +3,15 @@ class Link {         // Singly linked list node class
     private Link n;    // Point to next node in list
 
     // Constructors
-    Link(Object it, Link inn) { e = it; n = inn; }
-    Link(Link inn) { e = null; n = inn; }
+    Link(Object it, Link inn) {
+        e = it;
+        n = inn;
+    }
+    Link(Link inn)
+    {
+        e = null;
+        n = inn;
+    }
 
     Object element() { return e; }                  // Return the value
     Object setElement(Object it) { return e = it; } // Set element value

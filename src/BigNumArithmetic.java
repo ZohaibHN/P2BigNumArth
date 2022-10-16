@@ -20,11 +20,15 @@ public class BigNumArithmetic {
 
                     while (word.hasNext()) {
                         String nextWord = word.next();
+
                         if (!nextWord.equals("+") && !(nextWord.equals("*")) && !(nextWord.equals("^"))) {
                             nextWord = nextWord.replaceFirst("^0+(?!$)", ""); //trims zeroes
                                 stack.push(nextWord); //pushes number to stack
                         }
-                        System.out.print(nextWord + " "); //test to print out format and to see if zeroes are trimmed
+                        if (stack.topValue() == null) { //detects all "null" elements in stack and removes them
+                            stack.pop();
+                        } else
+                            System.out.print(stack.pop() + " "); //test to print out format and to see if zeroes are trimmed
                     }
                     System.exit(-1); //To loop through once for testing
                 }

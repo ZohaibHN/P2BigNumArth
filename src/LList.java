@@ -98,4 +98,5 @@ class LList implements List {
 
     // Check if the list is empty
     public boolean isEmpty() { return listSize == 0; }
+    public Object returnCurr() { return curr.element();}
 }

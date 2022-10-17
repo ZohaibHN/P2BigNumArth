@@ -1,4 +1,5 @@
 import java.io.*;
+
 import java.util.Scanner;
 public class BigNumArithmetic {
     static LStack stack = new LStack();
@@ -12,25 +13,27 @@ public class BigNumArithmetic {
                     String line = file.nextLine();
                     line = line.trim();
                     while (line.equals("")) {
-                        line = file.nextLine();
+                        line = file.next();
                         line = line.trim();
                     }
-                    Scanner singleLine = new Scanner(line);   //scanner to go through the line's elements
+                    Scanner singleLine = new Scanner(line);   //scanner to go through a single line's elements
+                    String wholeLine = "";
                     while (singleLine.hasNext()) {    //loop to go through the line's characters
-                        String wholeLine = singleLine.nextLine();
-
+                        int k;
+                        wholeLine = singleLine.nextLine();
                         wholeLine = wholeLine.replaceAll("\\W", " ");  //detects & removes special characters
                         wholeLine = wholeLine.replaceAll("\\s+", " ");  //gets rid of extra whitespace
                         wholeLine = wholeLine.replaceFirst("0+", ""); //trims zeroes
-                        for (int i = 0; i < wholeLine.length(); i++) {
-                            digitLinkList.append(wholeLine.charAt(i));
-                        }
                         stack.push(wholeLine); //pushes number to stack
-
-                        //System.out.print(stack.pop() + "\n"); //test to print out format and to see if zeroes & special characters are trimmed
-                        System.out.print(digitLinkList.remove());   //test to see if digits are added to LinkedList
+                        for (k = 0; k < wholeLine.length(); k++) {
+                            digitLinkList.append(wholeLine.charAt(k));
+                        }
+                        //System.out.print(stack.pop() + " hi\n"); //test to print out all digits
+                        System.out.print(digitLinkList.remove());   //test to print out digits of a line
                     }
+
                     //System.exit(-1); //To loop through once for testing
+
                 }
 
         } catch (IOException i) {

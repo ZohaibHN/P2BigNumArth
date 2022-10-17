@@ -1,9 +1,12 @@
-import java.io.*;
+import java.io.File;
+import java.io.IOException;
+import java.util.NoSuchElementException;
 import java.util.Scanner;
-public class BigNumArithmetic {
-    static LStack stack = new LStack();
-    static LList digitLinkList = new LList();
 
+public class BigNum2 {
+    static LStack stack = new LStack();
+    static int operatorNum =0;
+    static int operandNum = 0;
 
     public static void addNum(String num, String num2) {
         System.out.println("Method called");
@@ -74,49 +77,90 @@ public class BigNumArithmetic {
         System.out.println(stringTest+ " Has been operated and pushed");
         stack.push(stringTest);
     }
-
     public static void main(String[] args) {
+
         Scanner file;
-
+        //PrintWriter pw = new PrintWriter("output.txt");
         try {
-            FileWriter fw = new FileWriter("outputTest.txt");
-
             file = new Scanner(new File("BignumInput-1.txt"));
             while (file.hasNext()) {
                 String line = file.nextLine();
                 line = line.trim();
-                /**while (line.equals("")) {
-                 line = file.next();
-                 line = line.trim();
-                 }**/
-                Scanner singleLine = new Scanner(line);   //scanner to go through a single line's elements
-                String wholeLine;
+                while (line.equals("")) {
+                    line = file.next();
+                    line = line.trim();
+                }
+                Scanner singleLine = new Scanner(line); //scanner to go through a single line's elements
+
+
+                String wholeLine = "";
+                String singleLineRead;
                 while (singleLine.hasNext()) {    //loop to go through the line's characters
                     int k;
                     wholeLine = singleLine.nextLine();
+
                     //wholeLine = wholeLine.replaceAll("\\W", " ");  //detects & removes special characters
                     wholeLine = wholeLine.replaceAll("\\s+", " ");  //gets rid of extra whitespace
+                    wholeLine = wholeLine.replaceFirst("^0+(?!$)", ""); //trims zeroes
+                    System.out.println(wholeLine + " WHOLE LIINE");
+                    Scanner newScan = new Scanner(wholeLine);
 
-                    stack.push(wholeLine); //pushes number to stack
-                    for (k = 0; k < wholeLine.length(); k++) {
-                        digitLinkList.append(wholeLine.charAt(k));
+                    while (newScan.hasNext()) {
+                        try {
+
+                            singleLineRead = newScan.next();
+
+                            if ((singleLineRead.equals("^"))) {
+                                operatorNum++;
+                                //System.out.print(singleLineRead + " ");
+                                System.out.println("Exponentiation TEst");
+
+                                //String operand = (String)stack.pop();
+                                //System.out.println(Integer.parseInt((String)stack.pop()));
+                                //System.out.println((String)stack.pop());
+                            } else if (singleLineRead.equals("+")) {
+                                operatorNum++;
+                                System.out.print(singleLineRead + " ");
+                                System.out.println(("Perform Addition"));
+                                String pop1 = (String)stack.pop();
+                                String pop2 = (String)stack.pop();
+                                System.out.println(pop1 + "TEST POP!");
+                                System.out.println(pop2 + "POP 2  TEST");
+                                addNum(pop1, pop2);
+                            } else if (singleLineRead.equals("*")) {
+                                operatorNum++;
+                                System.out.print(singleLineRead + " ");
+                                System.out.println("Perform Multiplication");
+                            } else {
+                                operandNum++;
+                                stack.push(singleLineRead);
+                                System.out.println(singleLineRead + " Has been Pushed");
+                            }
+
+                        } catch (NoSuchElementException e) {
+
+                        }
+
+                        //else if (wholeLine.equals("+")) {
+                        //System.out.println("Perform addition here");
+                        //} else if (wholeLine.equals("*")) {
+                        //System.out.println("Perform Multiplaction here");
+                        //}
+                        //else {
+                        //  stack.push(wholeLine);
+                        //}
+
                     }
-                    char[] stackCharArray = stack.pop().toString().toCharArray();
-                    String sCAString = new String(stackCharArray);
-                    sCAString = sCAString.replaceAll("^0+(?!$)", "");
-                    //char[] linkListCharArray = digitLinkList.remove().toString().toCharArray();
                     //System.out.print(stack.pop() + " hi\n"); //test to print out all digits
-                    //System.out.print(linkListCharArray);   //test to print out digits of a line
-                    fw.write(sCAString + " = " + "\n");
 
+                    //System.out.print(digitLinkList.remove() + " DIGITS");   //test to print out digits of a line
                 }
-
                 //System.exit(-1); //To loop through once for testing
-
             }
-            fw.close();
+
         } catch (IOException i) {
             i.printStackTrace();
         }
+
     }
 }

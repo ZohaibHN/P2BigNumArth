@@ -35,7 +35,7 @@ public class BigNumArithmetic {
                         //char[] linkListCharArray = digitLinkList.remove().toString().toCharArray();
                         //System.out.print(stack.pop() + " hi\n"); //test to print out all digits
                         //System.out.print(linkListCharArray);   //test to print out digits of a line
-                        fw.write(sCAString + "\n");
+                        fw.write(sCAString + " = " + "\n");
 
                     }
 

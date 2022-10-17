@@ -3,7 +3,14 @@ import java.util.Scanner;
 public class BigNumArithmetic {
     static LStack stack = new LStack();
     static LList digitLinkList = new LList();
-
+    public static String removeZero(String s) { //function to remove leading zeros
+        int i = 0;  //iteration variable
+        while (i < s.length() && s.charAt(i) == '0')    //while not at end and current == 0
+            i++;    //skip 0
+        StringBuffer sb = new StringBuffer(s);  //StringBuffer used to replace 0's
+        sb.replace(0,i,""); //replace '0' with "" at index i
+        return sb.toString();   //return string version of StringBuffer
+    }
 
     public static void addNum(String num, String num2) {
         System.out.println("Method called");
@@ -68,7 +75,7 @@ public class BigNumArithmetic {
         result.moveToStart();
         for (int i = 0; i < result.length(); i++) {
             //System.out.println(result.getValue());
-            stringTest = stringTest + String.valueOf(result.getValue());
+            stringTest = (stringTest + (result.getValue()));
             result.next();
         }
         System.out.println(stringTest+ " Has been operated and pushed");
@@ -76,44 +83,48 @@ public class BigNumArithmetic {
     }
 
     public static void main(String[] args) {
-        Scanner file;
+        Scanner file;   //scanner for input file
 
         try {
-            FileWriter fw = new FileWriter("outputTest.txt");
-
-            file = new Scanner(new File("BignumInput-1.txt"));
-            while (file.hasNext()) {
+            FileWriter fw = new FileWriter("outputTest.txt");   //fileWriter to write to output file
+            file = new Scanner(new File("BignumInput-1.txt"));  //Scanner to read in input file
+            while (file.hasNext()) {    //loops until EOF
                 String line = file.nextLine();
-                line = line.trim();
-                /**while (line.equals("")) {
-                 line = file.next();
-                 line = line.trim();
-                 }**/
-                Scanner singleLine = new Scanner(line);   //scanner to go through a single line's elements
-                String wholeLine;
-                while (singleLine.hasNext()) {    //loop to go through the line's characters
-                    int k;
-                    wholeLine = singleLine.nextLine();
-                    //wholeLine = wholeLine.replaceAll("\\W", " ");  //detects & removes special characters
-                    wholeLine = wholeLine.replaceAll("\\s+", " ");  //gets rid of extra whitespace
+                line = line.trim(); //gets rid of excess whitespace at the beginning
+                //line = line.replaceAll("\\W", " ");  //detects & removes special characters
+                line = line.replaceAll("\\s+", " ");  //gets rid of extra whitespace
+                line = removeZero(line);
 
-                    stack.push(wholeLine); //pushes number to stack
-                    for (k = 0; k < wholeLine.length(); k++) {
-                        digitLinkList.append(wholeLine.charAt(k));
+                String individuals = "";
+
+                int k;  //iteration variable
+                for (k = 0; k < line.length(); k++) {
+                    Scanner individualsOfWholeLine = new Scanner(line);
+                    individuals = individualsOfWholeLine.nextLine();
+                }
+
+                stack.push(individuals); //pushes number to stack
+                for (k = 0; k < line.length(); k++) {
+                    digitLinkList.append(individuals.charAt(k));
+                    //stack.push(individuals); //pushes number to stack
                     }
-                    char[] stackCharArray = stack.pop().toString().toCharArray();
-                    String sCAString = new String(stackCharArray);
-                    sCAString = sCAString.replaceAll("^0+(?!$)", "");
-                    //char[] linkListCharArray = digitLinkList.remove().toString().toCharArray();
-                    //System.out.print(stack.pop() + " hi\n"); //test to print out all digits
-                    //System.out.print(linkListCharArray);   //test to print out digits of a line
+                char[] stackCharArray = stack.pop().toString().toCharArray();
+                String sCAString = new String(stackCharArray);
+                sCAString = removeZero(sCAString);
+                sCAString = sCAString.replaceAll("\\s+", " ");  //gets rid of extra whitespace
+                char[] linkListCharArray = digitLinkList.remove().toString().toCharArray();
+                //System.out.print(sCAString + " hi\n"); //test to print out all digits
+                System.out.print(linkListCharArray);   //test to print out digits of a line
+                //System.out.println(individuals.length()); //test to see length of wholeLine
+                if (!line.isEmpty()) {
                     fw.write(sCAString + " = " + "\n");
+                }
 
                 }
 
                 //System.exit(-1); //To loop through once for testing
 
-            }
+            file.close();
             fw.close();
         } catch (IOException i) {
             i.printStackTrace();

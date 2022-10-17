@@ -4,6 +4,11 @@ import java.util.Scanner;
 public class BigNumArithmetic {
     static LStack stack = new LStack();
     static LList digitLinkList = new LList();
+
+    public void addNum() {
+
+    }
+
     public static void main(String[] args) {
         Scanner file;
         //PrintWriter pw = new PrintWriter("output.txt");
@@ -23,17 +28,17 @@ public class BigNumArithmetic {
                         wholeLine = singleLine.nextLine();
                         wholeLine = wholeLine.replaceAll("\\W", " ");  //detects & removes special characters
                         wholeLine = wholeLine.replaceAll("\\s+", " ");  //gets rid of extra whitespace
-                        wholeLine = wholeLine.replaceFirst("0+", ""); //trims zeroes
+                        wholeLine = wholeLine.replaceFirst("^0+(?!$)", ""); //trims zeroes
                         stack.push(wholeLine); //pushes number to stack
                         for (k = 0; k < wholeLine.length(); k++) {
                             digitLinkList.append(wholeLine.charAt(k));
                         }
                         //System.out.print(stack.pop() + " hi\n"); //test to print out all digits
-                        System.out.print(digitLinkList.remove());   //test to print out digits of a line
+                        System.out.println(wholeLine + " Line");
+                        System.out.print(digitLinkList.remove() + " DIGITS");   //test to print out digits of a line
                     }
 
                     //System.exit(-1); //To loop through once for testing
-
                 }
 
         } catch (IOException i) {

@@ -13,7 +13,7 @@ public class BigNum2 {
         LList list = new LList();
         LList list2 = new LList();
         LList result = new LList();
-        String stringTest = "";
+        StringBuilder stringTest = new StringBuilder();
         String tempString = num;
 
         if (num.length() < num2.length()) {
@@ -71,13 +71,13 @@ public class BigNum2 {
         result.moveToStart();
         for (int i = 0; i < result.length(); i++) {
             //System.out.println(result.getValue());
-            stringTest = stringTest + String.valueOf(result.getValue());
+            stringTest.append(result.getValue());
             result.next();
         }
         System.out.println(stringTest+ " Has been operated and pushed");
-        stack.push(stringTest);
+        stack.push(stringTest.toString());
     }
-    public static void main(String[] args) {
+    /**public static void main(String[] args) {
 
         Scanner file;
         //PrintWriter pw = new PrintWriter("output.txt");
@@ -91,8 +91,6 @@ public class BigNum2 {
                     line = line.trim();
                 }
                 Scanner singleLine = new Scanner(line); //scanner to go through a single line's elements
-
-
                 String wholeLine = "";
                 String singleLineRead;
                 while (singleLine.hasNext()) {    //loop to go through the line's characters
@@ -110,35 +108,40 @@ public class BigNum2 {
 
                             singleLineRead = newScan.next();
 
-                            if ((singleLineRead.equals("^"))) {
-                                operatorNum++;
-                                //System.out.print(singleLineRead + " ");
-                                System.out.println("Exponentiation TEst");
+                            switch (singleLineRead) {
+                                case "^" -> {
+                                    operatorNum++;
+                                    //System.out.print(singleLineRead + " ");
+                                    System.out.println("Exponentiation TEst");
+                                }
 
                                 //String operand = (String)stack.pop();
                                 //System.out.println(Integer.parseInt((String)stack.pop()));
                                 //System.out.println((String)stack.pop());
-                            } else if (singleLineRead.equals("+")) {
-                                operatorNum++;
-                                System.out.print(singleLineRead + " ");
-                                System.out.println(("Perform Addition"));
-                                String pop1 = (String)stack.pop();
-                                String pop2 = (String)stack.pop();
-                                System.out.println(pop1 + "TEST POP!");
-                                System.out.println(pop2 + "POP 2  TEST");
-                                addNum(pop1, pop2);
-                            } else if (singleLineRead.equals("*")) {
-                                operatorNum++;
-                                System.out.print(singleLineRead + " ");
-                                System.out.println("Perform Multiplication");
-                            } else {
-                                operandNum++;
-                                stack.push(singleLineRead);
-                                System.out.println(singleLineRead + " Has been Pushed");
+                                case "+" -> {
+                                    operatorNum++;
+                                    System.out.print(singleLineRead + " ");
+                                    System.out.println(("Perform Addition"));
+                                    String pop1 = (String) stack.pop();
+                                    String pop2 = (String) stack.pop();
+                                    System.out.println(pop1 + "TEST POP!");
+                                    System.out.println(pop2 + "POP 2  TEST");
+                                    addNum(pop1, pop2);
+                                }
+                                case "*" -> {
+                                    operatorNum++;
+                                    System.out.print(singleLineRead + " ");
+                                    System.out.println("Perform Multiplication");
+                                }
+                                default -> {
+                                    operandNum++;
+                                    stack.push(singleLineRead);
+                                    System.out.println(singleLineRead + " Has been Pushed");
+                                }
                             }
 
                         } catch (NoSuchElementException e) {
-
+                            e.printStackTrace();
                         }
 
                         //else if (wholeLine.equals("+")) {
@@ -162,5 +165,5 @@ public class BigNum2 {
             i.printStackTrace();
         }
 
-    }
+    } **/
 }

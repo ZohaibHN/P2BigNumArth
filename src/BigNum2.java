@@ -77,7 +77,7 @@ public class BigNum2 {
         System.out.println(stringTest+ " Has been operated and pushed");
         stack.push(stringTest.toString());
     }
-    /**public static void main(String[] args) {
+    public static void main(String[] args) {
 
         Scanner file;
         //PrintWriter pw = new PrintWriter("output.txt");
@@ -165,5 +165,5 @@ public class BigNum2 {
             i.printStackTrace();
         }
 
-    } **/
+    }
 }

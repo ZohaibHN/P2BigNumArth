@@ -81,7 +81,7 @@ public class BigNumArithmetic {
             expressionResult.append(result.getValue());
             result.next();
         }
-        System.out.println(expressionResult+ " Has been operated and pushed");
+        System.out.println(expressionResult + " has been operated and pushed");
         stack.push(expressionResult.toString());
         return expressionResult;
     }
@@ -102,7 +102,7 @@ public class BigNumArithmetic {
                 String individuals = "";    //string for individual characters not including operators
                 String individualsWithOperators = "";   //string for individual characters including operators
 
-                int k;  //iteration variable
+                int k;  //loop variable
                 for (k = 0; k < lineWithOperators.length(); k++) {  //looping through line
                     Scanner individualsOfWholeLine = new Scanner(line);    //scanner for line without operators
                     Scanner individualsOfWholeLineWithOperators = new Scanner(lineWithOperators);   //scanner for line including operators
@@ -113,37 +113,50 @@ public class BigNumArithmetic {
                 for (k = 0; k < line.length(); k++) {
                     digitLinkList.append(individuals.charAt(k));    //adds digit at index k to LinkedList
                 }
-                for (k = 0; k < line.length(); k++) {
-                    if (individualsWithOperators.equals("+")) {
-                        operatorNum++;
-                        String popA = (String) stack.pop();
-                        String popB = (String) stack.pop();
-                        expressionResult = addNum(popA, popB);
-                    } else {
-                        operandNum++;
-                        stack.push(individualsWithOperators);
-                    }
-                    if ((operandNum - operatorNum) > 1) {
-                        expressionResult = new StringBuilder("hi");
-                    }
-                }
+
 
                 char[] stackCharArray = stack.pop().toString().toCharArray();
                 String sCAString = new String(stackCharArray);
                 sCAString = removeZero(sCAString);
                 sCAString = sCAString.replaceAll("\\s+", " ");  //gets rid of extra whitespace
-                char[] linkListCharArray = digitLinkList.remove().toString().toCharArray();
+                char[] digitCharArray = digitLinkList.remove().toString().toCharArray();
+                for (k = 0; k < line.length(); k++) {
+                    if (individualsWithOperators.equals("+")) {
+                        operatorNum++;
+                        String popA = (String) stack.pop();
 
-                //System.out.print(linkListCharArray);   //test to print out digits of a line
+                        String popB = (String) stack.pop();
+                        expressionResult = addNum(popA, popB);
+                        stack.push(expressionResult);
+                        System.out.println(expressionResult);
+                    } else {
+                        operandNum++;
+                        stack.push(individualsWithOperators);
+                    }
+                    /*if ((operandNum - operatorNum) > 1) {
+                     expressionResult = new StringBuilder("hi");
+                     }*/
+                }
+                /** operator counter test
+                int optnum = 0;
+                for (k = 0; k < sCAString.length(); k++) {
+                    if (sCAString.charAt(k) == '+' || sCAString.charAt(k) == '*' || sCAString.charAt(k) == '^') {
+                        optnum++;
+                    }
+                } **/
+                //System.out.print(digitCharArray);  //test to print digit linked list
 
                 if (!line.isEmpty()) {
+                    //System.out.println(optnum);
                     System.out.print(sCAString + " =  "+ expressionResult +" \n"); //test to print out all digits
                     fw.write(sCAString + " = " + expressionResult + "\n"); //test to output to file
                 }
+                //System.exit(-1); //To loop through once for testing
+
             }
-            //System.exit(-1); //To loop through once for testing
             file.close();
             fw.close();
+
         } catch (IOException i) {
             i.printStackTrace();
         }

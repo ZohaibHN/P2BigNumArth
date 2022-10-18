@@ -108,6 +108,7 @@ public class BigNumArithmetic {
                     Scanner individualsOfWholeLineWithOperators = new Scanner(lineWithOperators);   //scanner for line including operators
                     individualsWithOperators = individualsOfWholeLineWithOperators.nextLine();  //assignment to line
                     individuals = individualsOfWholeLine.nextLine();    //assignment to line
+
                 }
                 stack.push(individualsWithOperators); //line
                 for (k = 0; k < line.length(); k++) {
@@ -115,11 +116,11 @@ public class BigNumArithmetic {
                 }
 
 
-                char[] stackCharArray = stack.pop().toString().toCharArray();
-                String sCAString = new String(stackCharArray);
+                char[] stackCharArray = stack.pop().toString().toCharArray();   //representation of stack
+                String sCAString = new String(stackCharArray);  //representation of stack
                 sCAString = removeZero(sCAString);
                 sCAString = sCAString.replaceAll("\\s+", " ");  //gets rid of extra whitespace
-                char[] digitCharArray = digitLinkList.remove().toString().toCharArray();
+                //char[] digitCharArray = digitLinkList.remove().toString().toCharArray();  //test array to see if digits are added to LL
                 for (k = 0; k < line.length(); k++) {
                     if (individualsWithOperators.equals("+")) {
                         operatorNum++;
@@ -138,18 +139,18 @@ public class BigNumArithmetic {
                      }*/
                 }
                 /** operator counter test
-                int optnum = 0;
-                for (k = 0; k < sCAString.length(); k++) {
-                    if (sCAString.charAt(k) == '+' || sCAString.charAt(k) == '*' || sCAString.charAt(k) == '^') {
-                        optnum++;
-                    }
-                } **/
+                 int optnum = 0;
+                 for (k = 0; k < sCAString.length(); k++) {
+                 if (sCAString.charAt(k) == '+' || sCAString.charAt(k) == '*' || sCAString.charAt(k) == '^') {
+                 optnum++;
+                 }
+                 } **/
                 //System.out.print(digitCharArray);  //test to print digit linked list
 
                 if (!line.isEmpty()) {
                     //System.out.println(optnum);
-                    System.out.print(sCAString + " =  "+ expressionResult +" \n"); //test to print out all digits
-                    fw.write(sCAString + " = " + expressionResult + "\n"); //test to output to file
+                    //System.out.print(sCAString + " =  "+ expressionResult +" \n"); //test to print out all digits
+                    fw.write(sCAString + " = " + expressionResult + "\n"); //output to file
                 }
                 //System.exit(-1); //To loop through once for testing
 
